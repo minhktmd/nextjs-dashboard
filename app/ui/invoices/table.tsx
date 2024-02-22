@@ -5,12 +5,16 @@ import { formatDateToLocal, formatCurrency } from '@/app/lib/utils';
 import { fetchFilteredInvoices } from '@/app/lib/data';
 
 export default async function InvoicesTable({
-  query,
   currentPage,
+  searchParams,
 }: {
-  query: string;
   currentPage: number;
+  searchParams?: {
+    query?: string;
+    page?: string;
+  };
 }) {
+  const query = searchParams?.query || '';
   const invoices = await fetchFilteredInvoices(query, currentPage);
 
   return (
